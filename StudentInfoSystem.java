@@ -18,6 +18,22 @@ public class StudentInfoSystem {
 
         /* TODO 6: Implement the bubble sort algorithm to sort the
                    Subject objects by name.*/
+        int subjectCount = subjectsByName.size();
+        for (int i = 0; i < subjectCount - 1; i++) {
+            boolean swapped = false;
+            for (int j = 0; j < subjectCount - i - 1; j++) {
+                Subject current = (Subject) subjectsByName.get(j);
+                Subject next = (Subject) subjectsByName.get(j + 1);
+                if (current.name.compareTo(next.name) > 0) {
+                    subjectsByName.set(j, next);
+                    subjectsByName.set(j + 1, current);
+                    swapped = true;
+                }
+            }
+            if (!swapped) {
+                break;
+            }
+        }
         return subjectsByName;
     }
 
@@ -26,6 +42,21 @@ public class StudentInfoSystem {
 
         /* TODO 18: Implement the insertion sort algorithm to sort the
                    Student objects by name.*/
+        int studentCount = students.size();
+        for (int unsortedIndex = 1; unsortedIndex < studentCount; unsortedIndex++) {
+            Student unsortedStudent = (Student) students.get(unsortedIndex);
+            int sortedIndex = unsortedIndex - 1;
+            while (sortedIndex >= 0) {
+                Student sortedStudent = (Student) students.get(sortedIndex);
+                if (sortedStudent.name.compareTo(unsortedStudent.name) > 0) {
+                    students.set(sortedIndex + 1, sortedStudent);
+                    sortedIndex--;
+                } else {
+                    break;
+                }
+            }
+            students.set(sortedIndex + 1, unsortedStudent);
+        }
         return students;
     }
 
@@ -148,22 +179,18 @@ public class StudentInfoSystem {
         StudentInfoSystem studentInfoSystem = new StudentInfoSystem();
 
         /* TODO 8: Uncomment the SORT SUBJECTS BY NAME code block */
-        /**********************************************************
         System.out.println("\n\nSORT SUBJECTS BY NAME\n");
         List<Subject> subjects = studentInfoSystem.sortSubjectsByName();
         for (Subject subject : subjects) {
             System.out.println(subject);
         }
-         ************************************************************/
 
         /* TODO 20: Uncomment the SORT STUDENTS BY NAME code block. */
-        /**********************************************************
         System.out.println("\n\nSORT STUDENTS BY NAME\n");
         List<Student> students = studentInfoSystem.sortStudentsByName();
         for (Student student : students) {
             System.out.println(student);
         }
-         /************************************************************/
 
     }
 }
